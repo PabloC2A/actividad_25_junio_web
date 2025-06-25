@@ -14,11 +14,11 @@ from administrativo.forms import MatriculaForm, MatriculaEditForm
 def index(request):
     matriculas = Matricula.objects.all()
     estudiantes = Estudiante.objects.prefetch_related('lasmatriculas__modulo')
-    titulo = "Listado de matriculas"
+
     contexto = {
         'matriculas': matriculas,
         'numero_matriculas': matriculas.count(),
-        'mititulo': titulo,
+        'mititulo': "Listado de matriculas",
         'estudiantes': estudiantes,
     }
     return render(request, 'index.html', contexto)

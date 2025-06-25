@@ -48,10 +48,10 @@
     <td>{{ estudiante.get_tipo_estudiante_display }}</td>
     <td>{{ estudiante.edad }}</td>
     <td>
-      {% if estudiante.lasmatriculas.all %}
-        <ul>
-          {% for item in estudiante.matriculas_con_costo %}
-            <li>{{ item }}</li>
+      {% if estudiante.matriculas_inscritas %}
+        <ul style="list-style:none; padding-left: 0; margin: 0;">
+          {% for detalle in estudiante.detalle_matriculas_inscritas %}
+            <li>{{ detalle }}</li>
           {% endfor %}
           <li><b>Costo Total: ${{ estudiante.costo_total_matriculas }}</b></li>
         </ul>
@@ -62,4 +62,3 @@
   </tr>
   {% endfor %}
 </table>
-

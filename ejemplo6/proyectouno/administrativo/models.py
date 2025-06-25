@@ -25,16 +25,20 @@ class Estudiante(models.Model):
                 self.edad,
                 self.tipo_estudiante)
 
-    def obtener_matriculas(self):
+    @property
+    def matriculas_inscritas(self):
         return self.lasmatriculas.all()
 
-    def matriculas_con_costo(self):
-        # Retorna módulo y costo
-        return [f"Módulo: {m.modulo.nombre} - Costo: ${m.costo}" for m in self.lasmatriculas.all()]
+    @property
+    def detalle_matriculas_inscritas(self):
+        return [
+            f"Módulo: {matricula.modulo.nombre} - Costo: ${matricula.costo}"
+            for matricula in self.matriculas_inscritas
+        ]
 
+    @property
     def costo_total_matriculas(self):
-        return sum((m.costo for m in self.lasmatriculas.all()), Decimal('0.00'))
-        
+        return sum((matricula.costo for matricula in self.matriculas_inscritas), Decimal('0.00'))
 
 class Modulo(models.Model):
     """
