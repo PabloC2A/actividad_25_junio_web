@@ -14,11 +14,6 @@ from administrativo.forms import MatriculaForm, MatriculaEditForm
 def index(request):
     matriculas = Matricula.objects.all()
     estudiantes = Estudiante.objects.prefetch_related('lasmatriculas__modulo')
-
-    for est in estudiantes:
-        total = sum(m.costo for m in est.obtener_matriculas())
-        est.total_costo = total
-
     titulo = "Listado de matriculas"
     contexto = {
         'matriculas': matriculas,

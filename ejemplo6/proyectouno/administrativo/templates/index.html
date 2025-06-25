@@ -53,7 +53,7 @@
           {% for item in estudiante.matriculas_con_costo %}
             <li>{{ item }}</li>
           {% endfor %}
-          <li><b>Costo Total: ${{ estudiante.total_costo }}</b></li>
+          <li><b>Costo Total: ${{ estudiante.costo_total_matriculas }}</b></li>
         </ul>
       {% else %}
         No tiene matrículas.
@@ -62,3 +62,4 @@
   </tr>
   {% endfor %}
 </table>
+

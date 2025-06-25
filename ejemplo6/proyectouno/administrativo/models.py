@@ -1,4 +1,5 @@
 from django.db import models
+from decimal import Decimal
 
 # Create your models here.
 
@@ -30,6 +31,9 @@ class Estudiante(models.Model):
     def matriculas_con_costo(self):
         # Retorna módulo y costo
         return [f"Módulo: {m.modulo.nombre} - Costo: ${m.costo}" for m in self.lasmatriculas.all()]
+
+    def costo_total_matriculas(self):
+        return sum((m.costo for m in self.lasmatriculas.all()), Decimal('0.00'))
         
 
 class Modulo(models.Model):
