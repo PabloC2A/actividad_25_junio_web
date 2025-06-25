@@ -1,0 +1,64 @@
+<h1>{{mititulo}}</h1>
+<hr>
+<h3>Número de Matriculas {{ numero_matriculas }}</h3>
+<hr>
+[<a href="{% url 'crear_matricula' %}">nuevo</a>]
+<hr>
+<table border="1px">
+  <tr>
+    <th><b>Estudiante</b></th>
+    <th><b>Módulo</b></th>
+    <th><b>Comentario</b></th>
+    <th><b>Opciones</b></th>
+  </tr>
+  {% for e in matriculas %}
+  <tr>
+    <td>
+      {{e.estudiante.nombre}}
+      [<a href="{% url 'detalle_estudiante' e.estudiante.id %}">+</a>]
+    </td>
+    <td>
+      {{e.modulo.nombre}}
+    </td>
+    <td>
+      {{e.comentario}}
+    </td>
+    <td>
+      [<a href="{% url 'detalle_matricula' e.id %}">ver</a>]
+      [<a href="{% url 'editar_matricula' e.id %}">editar</a>]
+    </td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+<h2>Lista de Estudiantes</h2>
+<table border="1">
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Tipo</th>
+    <th>Edad</th>
+    <th>Matrículas</th>
+  </tr>
+  {% for estudiante in estudiantes %}
+  <tr>
+    <td>{{ estudiante.nombre }}</td>
+    <td>{{ estudiante.apellido }}</td>
+    <td>{{ estudiante.get_tipo_estudiante_display }}</td>
+    <td>{{ estudiante.edad }}</td>
+    <td>
+      {% if estudiante.lasmatriculas.all %}
+        <ul style="list-style:none; padding-left: 0; margin: 0;">
+          {% for item in estudiante.matriculas_con_costo %}
+            <li>{{ item }}</li>
+          {% endfor %}
+          <li><b>Costo Total: ${{ estudiante.total_costo }}</b></li>
+        </ul>
+      {% else %}
+        No tiene matrículas.
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
