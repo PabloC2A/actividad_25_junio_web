@@ -49,7 +49,7 @@
     <td>{{ estudiante.edad }}</td>
     <td>
       {% if estudiante.lasmatriculas.all %}
-        <ul style="list-style:none; padding-left: 0; margin: 0;">
+        <ul>
           {% for item in estudiante.matriculas_con_costo %}
             <li>{{ item }}</li>
           {% endfor %}
